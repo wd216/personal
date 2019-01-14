@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf147.ssm.dao.CustomerMapper">
+  <resultMap id="BaseResultMap" type="com.nf147.ssm.entity.Customer">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="psword" jdbcType="VARCHAR" property="psword" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from customer
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nf147.ssm.entity.Customer">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into customer (id, name, psword, 
+      email, create_at)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{psword,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.nf147.ssm.entity.Customer">
+    update customer
+    set name = #{name,jdbcType=VARCHAR},
+      psword = #{psword,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, name, psword, email, create_at
+    from customer
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, name, psword, email, create_at
+    from customer
+  </select>
+</mapper>

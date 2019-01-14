@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf147.ssm.dao.AdmMapper">
+  <resultMap id="BaseResultMap" type="com.nf147.ssm.entity.Adm">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="aname" jdbcType="VARCHAR" property="aname" />
+    <result column="apwd" jdbcType="VARCHAR" property="apwd" />
+    <result column="aphone" jdbcType="VARCHAR" property="aphone" />
+    <result column="create_at" jdbcType="TIMESTAMP" property="createAt" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from adm
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nf147.ssm.entity.Adm">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into adm (id, aname, apwd, 
+      aphone, create_at)
+    values (#{id,jdbcType=INTEGER}, #{aname,jdbcType=VARCHAR}, #{apwd,jdbcType=VARCHAR}, 
+      #{aphone,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.nf147.ssm.entity.Adm">
+    update adm
+    set aname = #{aname,jdbcType=VARCHAR},
+      apwd = #{apwd,jdbcType=VARCHAR},
+      aphone = #{aphone,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, aname, apwd, aphone, create_at
+    from adm
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, aname, apwd, aphone, create_at
+    from adm
+  </select>
+</mapper>

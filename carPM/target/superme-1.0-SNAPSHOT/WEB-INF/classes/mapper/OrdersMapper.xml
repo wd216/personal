@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf147.ssm.dao.OrdersMapper">
+  <resultMap id="BaseResultMap" type="com.nf147.ssm.entity.Orders">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="OIid" jdbcType="INTEGER" property="oiid" />
+    <result column="aid" jdbcType="INTEGER" property="aid" />
+    <result column="ordertime" jdbcType="TIMESTAMP" property="ordertime" />
+  </resultMap>
+  <insert id="insert" parameterType="com.nf147.ssm.entity.Orders">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into orders (id, OIid, aid, 
+      ordertime)
+    values (#{id,jdbcType=VARCHAR}, #{oiid,jdbcType=INTEGER}, #{aid,jdbcType=INTEGER}, 
+      #{ordertime,jdbcType=TIMESTAMP})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, OIid, aid, ordertime
+    from orders
+  </select>
+</mapper>
