@@ -29,10 +29,10 @@
       create_at = #{createAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByNameAndPwd" parameterType="com.nf147.ssm.entity.Customer" resultMap="BaseResultMap">
     select id, name, psword, email, create_at
     from customer
-    where id = #{id,jdbcType=INTEGER}
+    where name = #{name,jdbcType=VARCHAR} and psword = #{psword,jdbcType=VARCHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select id, name, psword, email, create_at

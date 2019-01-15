@@ -14,7 +14,7 @@
             <h1 style="color: red; margin: auto;">我的购物车</h1>
         </div>
         <div class="col-md-2 column" align="right">
-            <a href="index.jsp">返回首页</a>
+            <a href="/index/0">返回首页</a>
         </div>
     </div>
     <div class="row well well-sm">

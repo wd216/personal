@@ -8,7 +8,7 @@ public interface CustomerMapper {
 
     int insert(Customer record);
 
-    Customer selectByPrimaryKey(Integer id);
+    Customer selectByNameAndPwd(Customer record);
 
     List<Customer> selectAll();
 

@@ -8,9 +8,11 @@ public interface BookMapper {
 
     int insert(Book record);
 
-    Book selectByPrimaryKey(Integer id);
+    Book selectByName(String bname);
 
     List<Book> selectAll();
+
+    List<Book> selectByType(Integer bid);
 
     int updateByPrimaryKey(Book record);
 }
