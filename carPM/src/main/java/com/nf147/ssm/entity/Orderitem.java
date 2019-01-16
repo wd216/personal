@@ -1,19 +1,26 @@
 package com.nf147.ssm.entity;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Orderitem {
     private Integer id;
 
-    private Integer uid;
+    private Customer customer;
+//    private Integer uid;
 
-    private Integer bid;
+    private Book book;
+//    private Integer bid;
 
     private Integer state;
 
     private Integer num;
 
     private BigDecimal price;
+
+//    public Orderitem(Integer uid, Integer bid, int i) {
+//        this.num=i;
+//    }
 
     public Integer getId() {
         return id;
@@ -23,20 +30,37 @@ public class Orderitem {
         this.id = id;
     }
 
-    public Integer getUid() {
-        return uid;
+//    public Integer getUid() {
+//        return uid;
+//    }
+//
+//    public void setUid(Integer uid) {
+//        this.uid = uid;
+//    }
+//
+//    public Integer getBid() {
+//        return bid;
+//    }
+//
+//    public void setBid(Integer bid) {
+//        this.bid = bid;
+//    }
+
+
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public Integer getBid() {
-        return bid;
+    public Book getBook() {
+        return book;
     }
 
-    public void setBid(Integer bid) {
-        this.bid = bid;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     public Integer getState() {
@@ -62,4 +86,6 @@ public class Orderitem {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
+
 }

@@ -3,9 +3,11 @@
 <mapper namespace="com.nf147.ssm.dao.OrdersMapper">
   <resultMap id="BaseResultMap" type="com.nf147.ssm.entity.Orders">
     <result column="id" jdbcType="VARCHAR" property="id" />
-    <result column="OIid" jdbcType="INTEGER" property="oiid" />
-    <result column="aid" jdbcType="INTEGER" property="aid" />
+    <!--<result column="OIid" jdbcType="INTEGER" property="oiid" />-->
+    <!--<result column="aid" jdbcType="INTEGER" property="aid" />-->
     <result column="ordertime" jdbcType="TIMESTAMP" property="ordertime" />
+    <association property="customer" column="id" select="com.nf147.ssm.dao.CustomerMapper.selectByKey"/>
+    <association property="orderitem" column="id" select="com.nf147.ssm.dao.OrderitemMapper.selectByPrimaryKey"/>
   </resultMap>
   <insert id="insert" parameterType="com.nf147.ssm.entity.Orders">
     <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">

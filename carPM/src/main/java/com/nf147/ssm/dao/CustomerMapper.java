@@ -10,6 +10,8 @@ public interface CustomerMapper {
 
     Customer selectByNameAndPwd(Customer record);
 
+    Customer selectByKey(Integer id);
+
     List<Customer> selectAll();
 
     int updateByPrimaryKey(Customer record);

@@ -3,11 +3,15 @@
 <mapper namespace="com.nf147.ssm.dao.OrderitemMapper">
   <resultMap id="BaseResultMap" type="com.nf147.ssm.entity.Orderitem">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="uid" jdbcType="INTEGER" property="uid" />
-    <result column="bid" jdbcType="INTEGER" property="bid" />
+    <!--<result column="uid" jdbcType="INTEGER" property="uid" />-->
+    <!--<result column="bid" jdbcType="INTEGER" property="bid" />-->
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="num" jdbcType="INTEGER" property="num" />
     <result column="price" jdbcType="DECIMAL" property="price" />
+    <association property="customer" column="id" select="com.nf147.ssm.dao.CustomerMapper.selectByKey">
+    </association>
+    <collection property="book" column="id" select="com.nf147.ssm.dao.BookMapper.selectById" ofType="com.nf147.ssm.entity.Book">
+    </collection>
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from orderitem
@@ -17,10 +21,9 @@
     <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into orderitem (id, uid, bid, 
-      state, num, price)
+    insert into orderitem (id, uid, bid, num)
     values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{bid,jdbcType=INTEGER}, 
-      #{state,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL})
+      #{state,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.nf147.ssm.entity.Orderitem">
     update orderitem
@@ -40,4 +43,17 @@
     select id, uid, bid, state, num, price
     from orderitem
   </select>
+  <select id="selectByCusId" resultMap="BaseResultMap">
+    select id, uid, bid, state, num, price
+    from orderitem
+    where uid = #{uid,jdbcType=INTEGER}
+  </select>
+  <!--TODO 现在要写表与表之间的关系，目前对 一对一 ，一对多 的关系不是很熟悉-->
+  <!--TODO collection 和 association 的使用-->
+  <!--TODO 2019/1/15 21:34 完成了用户跟购物车 一对一 的关系 -->
+  <!--TODO 参考网址 https://www.cnblogs.com/yansum/p/5819973.html -->
+  <!-- 写一个根据用户id 来查询 购物车-->
+  <!--<select id="selectByUid" resultMap="BaseResultMap">-->
+    <!---->
+  <!--</select>-->
 </mapper>

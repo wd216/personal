@@ -31,12 +31,23 @@
             </form>
         </div>
         <div class="col-md-2 column" align="right">
-            <a id="carthref" href="/cart"><span class="badge pull-right">2</span>我的购物车</a>
+            <a id="carthref" onclick="order()" href="/orderItem/${newcustomer.id}"><span class="badge pull-right"></span>我的购物车</a>
         </div>
-        <div class="col-md-1 column" align="right">
-            <a href="#" id="loginhref" onclick="login()">登陆</a>
-            <a href="#" id="reghref" onclick="zhuche()">注册</a>
-        </div>
+
+        <c:choose>
+            <c:when test="${newcustomer == null}">
+                <div class="col-md-1 column" align="right">
+                    <a href="#" id="loginhref" onclick="login()">登陆</a>
+                    <a href="#" id="reghref" onclick="zhuche()">注册</a>
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div class="col-md-1 column" align="right">
+                    <p>${newcustomer.name}：欢迎您</p>
+                    <a href="/Login/return" onclick="zhuxiao()">注销</a>
+                </div>
+            </c:otherwise>
+        </c:choose>
     </div>
     <!-- 商品列表 -->
     <div class="row">
@@ -62,12 +73,12 @@
                                  src="/img/${book.image}">
                             <div class="caption">
                                 <h3 style="color: red; font-weight: bold;">¥${book.price}</h3>
+                                <p>${book.bname}</p>
                                 <p>
-                                        ${book.bname}
+                                    <a class="btn btn-primary addcart" onclick="addorder(this)">加入购物车</a>
                                 </p>
-                                <p>
-                                    <a class="btn btn-primary addcart" href="#">加入购物车</a>
-                                </p>
+                                <p name="uid" value="${newcustomer.id}" />
+                                <p name="bid" value="${book.id}" />
                             </div>
                         </div>
                     </div>
@@ -94,12 +105,42 @@
             $('#regModal').modal('show');
         });
     }
-    function change() {
-        if (${data.news != null}) {
-            $('#loginhref').val("${news.name}欢迎你");
-            $('#reghref').val("注销");
+    // 退出的方法
+    function zhuxiao(){
+        fetch('http://localhost:8080/Login/return')
+            .then(data => {
+                window.location.reload();
+            });
+    }
+    // 进入购物车的方法
+    function order(){
+        if (${newcustomer == null}){
+            alert("请先登录");
+            $('#carthref').attr("href","/orderItem/0");
+        }else{
+            $('#carthref').attr("href","/orderItem/${newcustomer.id}")
         }
     }
+    //添加物品到购物车的方法
+    function addorder(event){
+        const parent = event.parentNode;
+        // TODO 获取 当前节点 的父节点的下一个兄弟节点的值
+        console.log(parent.next().value);
+        // const bid = event.getElementsByName("bid");
+        // console.log(uid + ":" + bid);
+        // $.ajax({
+        //     type: "POST",
+        //     url: "/orderItem/add",
+        //     data: {
+        //         customer:uid[0].val(),
+        //         book:bid[0].val()
+        //     }
+        // }).done(function (data) {
+        //     console.log("ok");
+        // });
+    }
+
+
 </script>
 
 </html>

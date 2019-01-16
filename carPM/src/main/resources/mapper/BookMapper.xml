@@ -3,7 +3,7 @@
 <mapper namespace="com.nf147.ssm.dao.BookMapper">
   <resultMap id="BaseResultMap" type="com.nf147.ssm.entity.Book">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="bid" jdbcType="INTEGER" property="bid" />
+    <!--<result column="bid" jdbcType="INTEGER" property="bid" />-->
     <result column="bname" jdbcType="VARCHAR" property="bname" />
     <result column="author" jdbcType="VARCHAR" property="author" />
     <result column="image" jdbcType="VARCHAR" property="image" />
@@ -13,6 +13,7 @@
     <result column="pages" jdbcType="INTEGER" property="pages" />
     <result column="word" jdbcType="INTEGER" property="word" />
     <result column="printingtime" jdbcType="TIMESTAMP" property="printingtime" />
+    <association property="btype" column="id" select="com.nf147.ssm.dao.BooktypeMapper.selectByPrimaryKey"/>
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from book
@@ -57,5 +58,9 @@
   <select id="selectByType" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select id, bid, bname, author, image, price, press, presstime, pages, word, printingtime
     from book where bid = #{bid,jdbcType=INTEGER}
+  </select>
+  <select id="selectById" resultMap="BaseResultMap">
+    select id, bid, bname, author, image, price, press, presstime, pages, word, printingtime
+    from book where id = #{id,jdbcType=INTEGER}
   </select>
 </mapper>

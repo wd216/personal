@@ -14,5 +14,7 @@ public interface BookMapper {
 
     List<Book> selectByType(Integer bid);
 
+    Book selectById(Integer id);
+
     int updateByPrimaryKey(Book record);
 }

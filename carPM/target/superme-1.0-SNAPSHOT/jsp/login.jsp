@@ -49,6 +49,7 @@
 <script type="text/javascript">
 
     //点击登陆发送请求到服务器
+    //用户登录的方法，在放里面进行了 ajax 请求
     function checkLogin() {
         console.log($("#account").val() + "---" + $("#password").val());
         $.ajax({
@@ -59,21 +60,15 @@
                 psword: $("#password").val()
             }
         }).done(function (data) {
-            alert(data);
             if (data == "1") {
+                alert("登录成功！");
                 window.location.reload();
-                $('')
             } else if (data == "0") {
                 $("#msg").text("账号或密码错误，请重新输入");
             } else {
                 alert(data);
             }
         });
-    }
-
-    //单击关闭按钮登录窗口
-    function hideDiv() {
-        $("modal"), hide();
     }
 </script>
 </body>

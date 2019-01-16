@@ -6,7 +6,8 @@ import java.util.Date;
 public class Book {
     private Integer id;
 
-    private Integer bid;
+    private Booktype btype;
+//    private Integer bid;
 
     private String bname;
 
@@ -34,13 +35,13 @@ public class Book {
         this.id = id;
     }
 
-    public Integer getBid() {
-        return bid;
-    }
-
-    public void setBid(Integer bid) {
-        this.bid = bid;
-    }
+//    public Integer getBid() {
+//        return bid;
+//    }
+//
+//    public void setBid(Integer bid) {
+//        this.bid = bid;
+//    }
 
     public String getBname() {
         return bname;
@@ -112,5 +113,13 @@ public class Book {
 
     public void setPrintingtime(Date printingtime) {
         this.printingtime = printingtime;
+    }
+
+    public Booktype getBtype() {
+        return btype;
+    }
+
+    public void setBtype(Booktype btype) {
+        this.btype = btype;
     }
 }

@@ -3,6 +3,8 @@ package com.nf147.ssm.entity;
 public class Address {
     private Integer id;
 
+    private Customer customer;
+
     private Integer uid;
 
     private String address;

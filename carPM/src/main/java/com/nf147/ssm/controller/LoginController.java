@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 @Controller
 public class LoginController {
 
@@ -21,13 +24,18 @@ public class LoginController {
 
     @RequestMapping("/Login")
     @ResponseBody
-    private String login(Customer customer,Model model){
+    private String login(Customer customer, HttpServletRequest request){
         Customer newcustomer = cmapper.selectByNameAndPwd(customer);
-        System.out.println(newcustomer);
+//        System.out.println(newcustomer);
         if (newcustomer != null ){
-            model.addAttribute("news",newcustomer);
-            return "1";
+           request.getSession().setAttribute("newcustomer",newcustomer);
+           return "1";
         }
         return "0";
+    }
+    @RequestMapping("/Login/return")
+    public String ret(HttpServletRequest request,Model model){
+        request.getSession().setAttribute("newcustomer",null);
+        return indexController.index(model);
     }
 }

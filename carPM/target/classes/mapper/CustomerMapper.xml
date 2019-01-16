@@ -34,8 +34,14 @@
     from customer
     where name = #{name,jdbcType=VARCHAR} and psword = #{psword,jdbcType=VARCHAR}
   </select>
+
   <select id="selectAll" resultMap="BaseResultMap">
     select id, name, psword, email, create_at
     from customer
+  </select>
+  <select id="selectByKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id,name,psword,email,create_at
+    from customer
+    where id = #{id,jdbcType=INTEGER}
   </select>
 </mapper>

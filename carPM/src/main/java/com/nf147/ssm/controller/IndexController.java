@@ -44,7 +44,8 @@ public class IndexController {
     }
 
 //     TODO 在搜索中停下了，因为想用到 ajax 进行无页面刷新，对 POST 的请求传参不是很懂哦
-//    TODO 暂时放下搜索，坐登录
+//    TODO 暂时放下搜索，做登录
+//    TODO 登录和注销功能已经完成了，根据书名搜索还没做 19/1/16 20:31
     @RequestMapping(value = "/name",method = RequestMethod.GET)
     public String byName(Model model,@RequestParam("search") String name){
         // 查询多有的类型数据,并加入到 data 中
